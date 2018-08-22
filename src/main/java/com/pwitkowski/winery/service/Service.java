@@ -3,29 +3,43 @@ package com.pwitkowski.winery.service;
 import com.pwitkowski.winery.model.Ingredient;
 import com.pwitkowski.winery.model.IngredientUnit;
 import com.pwitkowski.winery.model.Recipe;
+import com.pwitkowski.winery.repository.IngredientRepository;
+import com.pwitkowski.winery.repository.RecipeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Service {
+@org.springframework.stereotype.Service
+public class Service implements RecipeService {
 
-    public List recipeList = new ArrayList();
+    @Autowired
+    private RecipeRepository recipeRepository;
 
-    private List ingredientList = new ArrayList();
+    @Autowired
+    private IngredientRepository ingredientRepository;
 
+    @Override
     public void createAndAddIngredientToIngredientList(String ingredientName, Integer ingredientQuantity, IngredientUnit ingredientUnit) {
         Ingredient ingredient = new Ingredient(ingredientName, ingredientQuantity, ingredientUnit);
-        ingredientList.add(ingredient);
+        ingredientRepository.save(ingredient);
     }
 
-    public void removeIngredientFromIngredientList(Ingredient ingredient) {
-        ingredientList.remove(ingredient);
+    @Override
+    public void createRecipeAndAddToRecipeList(String dishName, Integer preparationTime, Integer peopleQuantity, String toDoDescription, Integer id) {
+        Recipe recipe = new Recipe(dishName, preparationTime, peopleQuantity, toDoDescription);
+        recipeRepository.save(recipe);
     }
 
-    public void createRecipeAndAddToRecipeList(String dishName, Integer preparationTime, Integer peopleQuantity, String toDoDescription) {
-        Recipe recipe = new Recipe(dishName, preparationTime, peopleQuantity, toDoDescription, ingredientList);
-        recipeList.add(recipe);
+    @Override
+    public List<String> getAllRecipeIngredients(Integer recipeId) {
+        List<String> result = new ArrayList<>();
+        List<Ingredient> ingredients = ingredientRepository.findByRecipeId(recipeId);
+        for (Ingredient ingredient : ingredients) {
+            result.add(ingredient.toString());
+        }
+        return result;
     }
 
 
