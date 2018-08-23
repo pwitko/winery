@@ -12,8 +12,8 @@ public class TestClass {
         recipeService.createAndAddIngredientToIngredientList("makaron", 300, IngredientUnit.g);
         recipeService.createAndAddIngredientToIngredientList("boczek", 700, IngredientUnit.g);
         recipeService.createAndAddIngredientToIngredientList("sól", 1, IngredientUnit.szczypta);
-        recipeService.createRecipeAndAddToRecipeList("carbonara", 30, 4, "\n1. Ugotuj makaron. \n 2. Usmaz boczek. \n 3. Wymieszaj razem.\n");
-        System.out.println(recipeService.recipeList.get(0));
+        recipeService.createRecipeAndAddToRecipeList("carbonara", 30, 4, "\n1. Ugotuj makaron. \n 2. Usmaz boczek. \n 3. Wymieszaj razem.\n",3);
+        System.out.println(recipeService.getAllRecipeIngredients(3));
 
     }
 }
