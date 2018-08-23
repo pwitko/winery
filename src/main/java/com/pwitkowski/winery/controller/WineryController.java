@@ -13,12 +13,12 @@ public class WineryController {
     @Autowired
     private Service service;
 
-    @RequestMapping(value = "/author", method = RequestMethod.GET)
+    @RequestMapping(value = "/author")
     public String author(){
       return "author";
     }
 
-    @RequestMapping(value = "/recipeList", method = RequestMethod.GET)
+    @RequestMapping(value = "/recipeList")
     public String recipeList(){
         return "recipeList";
     }
